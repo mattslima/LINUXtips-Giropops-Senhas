@@ -38,7 +38,7 @@ COPY . .
 #COPY copiará os arquivos da nossa aplicação giropops-senhas para dentro de app, dentro do container
 RUN apt-get update -y 
 RUN apt-get install pip -y
-RUN pip install -no-cache-dir -r requeriments.txt 
+RUN pip install --no-cache-dir -r requeriments.txt 
 RUN pip install flask redis prometheus_client
 RUN pip install --upgrade flask
 RUN apt-get install redis -y
@@ -64,6 +64,35 @@ giropops-senha: é a tag criada
 .: o ponto indica que o arquivo Dockerfile está no mesmo nivel do diretorio que estamos 
 ![image](https://github.com/mattslima/LINUXtips-Giropops-Senhas/assets/55968562/c6efc318-cd0d-4866-847e-e2de98511027)
 
+
 No terminal da pra acompanhar cada passo a passo
 ![image](https://github.com/mattslima/LINUXtips-Giropops-Senhas/assets/55968562/18207926-e85f-4fc0-bf69-fb37802d287d)
+
+Ao finalizar 
+![image](https://github.com/mattslima/LINUXtips-Giropops-Senhas/assets/55968562/1662c093-3ad6-453c-8bbf-4f93bf916043)
+
+Vamos verficiar nossa imagem com comando docker image ls 
+![image](https://github.com/mattslima/LINUXtips-Giropops-Senhas/assets/55968562/42659901-ba23-47b6-b250-56007bf9d74e)
+
+Vamos finalmente iniciar nosso container com o comando
+docker container run -d -p 5000:5000 --name giropops giropops-senha:1.0
+E em seguida digitamos o seguinte comando para ver se ele está em excução
+docker container ls
+
+![image](https://github.com/mattslima/LINUXtips-Giropops-Senhas/assets/55968562/454aebda-5c1b-4072-9afb-4be4bf1c9c9b)
+
+Explicando os comandos 
+docker container run: Para iniciar o container
+-d: modo detached ele deixa o nosso terminal solto, a aplicação fica em background
+-p: Redirecionamento de porta, indicando que a porta 5000 do container vai jogar os dados na porta 5000 do localhost
+--name: o nome do container, neste caso giropops
+giropops-senha:1.0: é o nome da imagem que buildamos no passo anterior e o numeral é a versão do build
+
+
+
+Ao acessar localhost:5000 esse será nosso resultado
+
+![image](https://github.com/mattslima/LINUXtips-Giropops-Senhas/assets/55968562/8736c586-65bb-4b63-b4ef-46a0014e6350)
+
+
 
